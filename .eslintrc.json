@@ -1,0 +1,27 @@
+{
+  "ecmaFeatures": {
+    "jsx": true,
+    "modules": true
+  },
+  "env": {
+    "node": true,
+    "browser": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "indent": [2, 2],
+    "quotes": [2, "single"],
+    "strict": [2, "never"],
+    "linebreak-style": [2, "unix"],
+    "semi": [2, "always"],
+    "no-multi-spaces": [
+      2, {
+        "exceptions": {
+          "VariableDeclarator": true
+        }
+      }
+    ],
+    "key-spacing": [0, {"align": "value"}],
+    "no-console": [1]
+  }
+}
