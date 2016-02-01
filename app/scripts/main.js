@@ -7,8 +7,6 @@ import About from './routes/About.jsx';
 import Contact from './routes/Contact.jsx';
 import Portfolio from './routes/Portfolio/Portfolio.jsx';
 
-require('../styles/main.scss');
-
 var WebFontConfig = {
   google: { families: [ 'Roboto:400,300,500:latin' ] }
 };

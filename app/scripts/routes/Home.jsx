@@ -13,6 +13,7 @@ export default class Home extends Component {
       style: {
         height: '100vh',
         width: '100vw',
+        overflow: 'auto',
         backgroundSize: 'cover',
         backgroundAttachment: 'fixed'
       },
@@ -39,8 +40,8 @@ export default class Home extends Component {
   render () {
     return (
       <div>
-        <section style={Object.assign({}, this.state.style, this.state.section1)} id="home">
-          <div style={{position: 'absolute', top: '50vh', left: '50vw', transform: 'translate(-50%, -50%)'}} className="container-fluid">
+        <section style={Object.assign({}, this.state.style, this.state.section1)} id="home" className="container-fluid">
+          <div style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}>
             <Header title="Joseph Morse" style={this.state.header}>
               <h2>Better Code To Cover Your Backend</h2>
             </Header>

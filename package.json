@@ -22,7 +22,7 @@
   "private": true,
   "scripts": {
     "start": "node server.js",
-    "build": "NODE_ENV=production webpack -p"
+    "build": "NODE_ENV=production webpack -p --config webpack.production.config.js"
   },
   "repository": {
     "type": "git",
@@ -63,6 +63,7 @@
     "bootstrap-sass": "^3.3.6",
     "font-awesome": "^4.5.0",
     "jquery": "^2.2.0",
+    "node-sass-middleware": "^0.9.7",
     "radium": "^0.16.5",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",

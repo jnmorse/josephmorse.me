@@ -14,18 +14,12 @@ export default class Home extends Component {
         height: '100vh',
         width: '100vw',
         backgroundSize: 'cover',
-        backgroundAttachment: 'fixed'
-      },
-      section1: {
-        backgroundImage: 'url("/images/bg-1.jpg")'
-      },
-      section2: {
+        backgroundAttachment: 'fixed',
+        backgroundImage: 'url("/images/bg-2.jpg")',
         fontWeight: 'bold',
         paddingBottom: '1em',
-        height: 'auto',
         backgroundColor: '#0a0a0a',
         color: '#fafafa',
-        backgroundImage: 'url("/images/bg-2.jpg")'
       },
       header: {
         color: '#fafafa',
@@ -39,7 +33,7 @@ export default class Home extends Component {
   render () {
     return (
       <div>
-        <section id="about" className="container-fluid" style={Object.assign({}, this.state.style, this.state.section2)}>
+        <section id="about" className="container-fluid" style={this.state.style}>
           <Header title="About Me" />
 
           <img style={{
