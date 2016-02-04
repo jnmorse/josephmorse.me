@@ -25,6 +25,9 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin(['app', 'vendor'], 'js/[name].js'),
     new webpack.HotModuleReplacementPlugin()

@@ -1,7 +1,7 @@
 import React, { createClass } from 'react';
-import Header from './elements/Header.jsx';
-import Footer from './elements/Footer.jsx';
-import Copyright from './components/Copyright.jsx';
+import Header from './elements/Header';
+import Footer from './elements/Footer';
+import Copyright from './components/Copyright';
 import Person from './models/Person';
 import { Link } from 'react-router';
 

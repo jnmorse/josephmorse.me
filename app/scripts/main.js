@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import Base from './base.jsx';
-import Home from './routes/Home.jsx';
-import About from './routes/About.jsx';
-import Contact from './routes/Contact.jsx';
-import Portfolio from './routes/Portfolio/Portfolio.jsx';
+import Base from './base';
+import Home from './routes/Home';
+import About from './routes/About';
+import Contact from './routes/Contact';
+import Portfolio from './routes/Portfolio/Portfolio';
 
 var WebFontConfig = {
   google: { families: [ 'Roboto:400,300,500:latin' ] }

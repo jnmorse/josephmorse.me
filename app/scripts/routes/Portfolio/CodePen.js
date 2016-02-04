@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export default function CodePen (props) {
   return (
-    <section className="col-xs-6">
+    <section className="col-xs-12 col-md-6">
       <header>
         <h2>{props.title}</h2>
       </header>
