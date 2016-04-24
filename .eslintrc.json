@@ -1,27 +1,57 @@
 {
-  "ecmaFeatures": {
-    "jsx": true,
-    "modules": true
-  },
   "env": {
-    "node": true,
-    "browser": true
+    "browser": true,
+    "es6": true,
+    "node": true
   },
-  "parser": "babel-eslint",
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react"
+  ],
   "rules": {
-    "indent": [2, 2],
-    "quotes": [2, "single"],
-    "strict": [2, "never"],
-    "linebreak-style": [2, "unix"],
-    "semi": [2, "always"],
-    "no-multi-spaces": [
-      2, {
-        "exceptions": {
-          "VariableDeclarator": true
-        }
-      }
+    "indent": [
+      "error",
+      2
     ],
-    "key-spacing": [0, {"align": "value"}],
-    "no-console": [1]
+    "react/require-render-return": "error",
+    "react/self-closing-comp": "error",
+    "react/no-multi-comp": "error",
+    "react/jsx-closing-bracket-location": ["error", "tag-aligned"],
+    "react/prefer-es6-class": [
+      "error",
+      "always"
+    ],
+    "react/jsx-indent": [
+      "error",
+      2
+    ],
+    "react/jsx-indent-props": [
+      "error",
+      2
+    ],
+    "react/jsx-pascal-case": "error",
+    "react/jsx-key": "error",
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "never"
+    ]
   }
 }
