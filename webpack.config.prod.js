@@ -4,6 +4,10 @@ var path = require('path')
 // PostCSS
 var autoprefixer = require('autoprefixer')
 
+// Extract sass files to css files
+var extractTextPlugin = require('extract-text-webpack-plugin')
+var extractSass = new extractTextPlugin('css/[name].css')
+
 var htmlWebpackPlugin = require('html-webpack-plugin')
 
 require('dotenv').config()
@@ -11,15 +15,9 @@ require('dotenv').config()
 module.exports = {
   entry: {
     main: [
-      'webpack-hot-middleware/client?path=/__webpack_hmr',
-      'webpack/hot/dev-server',
       path.resolve(__dirname, 'src/client'),
       path.resolve(__dirname, 'src/styles')
     ]
-  },
-  devtool: 'inline-source-map',
-  devServer: {
-    contentBase: 'public'
   },
   output: {
     path: path.resolve(__dirname, 'public'),
@@ -40,12 +38,11 @@ module.exports = {
       {
         test: /\.scss|\.sass$/,
         exclude: /node_modules/,
-        loaders: [
-          'style',
+        loaders: extractSass.extract([
           'css',
           'postcss',
           'sass'
-        ]
+        ])
       },
 
       {
@@ -82,16 +79,24 @@ module.exports = {
     ]
   },
   plugins: [
+    extractSass,
     new htmlWebpackPlugin({
       hash: true,
       inject: true,
       title: 'React Webpack',
       template: './src/index.html'
     }),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      mangle: {
+        except: ['exports', 'require']
+      },
+      compress: {
+        warnings: false
+      }
     })
   ]
 }
