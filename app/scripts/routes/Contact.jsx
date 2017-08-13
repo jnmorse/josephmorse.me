@@ -18,6 +18,24 @@ export default class Contact extends Component {
 
   stopSend (e) {
     e.preventDefault();
+
+    let request = fetch("/mail", {
+      method: 'POST',
+      body: {
+        from: document.getElementById('from').value,
+        subject: document.getElementById('subject').value,
+        content: document.getElementById('message').value
+      }
+    });
+
+    request.then(response => {
+      response.json().then(json => console.log(json));
+    });
+
+    request.catch(err => {
+      console.log(err);
+    });
+
     this.setState({
       error: 'Can not Send Message at This Time'
     });

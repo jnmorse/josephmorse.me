@@ -44,7 +44,6 @@
     "eslint": "^1.10.3",
     "eslint-plugin-babel": "^3.0.0",
     "eslint-plugin-react": "^3.16.1",
-    "express": "^4.13.4",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "^2.7.1",
@@ -62,12 +61,14 @@
   },
   "dependencies": {
     "bootstrap-sass": "^3.3.6",
+    "express": "^4.15.4",
     "font-awesome": "^4.5.0",
     "jquery": "^2.2.0",
     "node-sass-middleware": "^0.9.7",
     "radium": "^0.16.5",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
-    "react-router": "^2.0.0-rc5"
+    "react-router": "^2.0.0-rc5",
+    "sendgrid": "^5.2.1"
   }
 }
