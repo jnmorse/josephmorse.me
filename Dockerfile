@@ -1,5 +1,9 @@
-# Pull Node Version 6
-FROM node:6
+# Pull Node Version 8
+FROM node:8
+
+# Labels
+LABEL version="1.0.3" \
+      maintainer="joseph@josephmorse.me"
 
 # Expose Port
 EXPOSE 3000

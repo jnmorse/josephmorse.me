@@ -1,19 +1,16 @@
 var webpack = require('webpack');
-var path = require('path');
-
-var app = path.join(__dirname, 'app');
 
 module.exports = {
   entry: {
     app: [
-      'webpack-hot-middleware/client',
-      path.join(__dirname, 'app', 'scripts', 'main')
-    ],
+      'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+      `${__dirname}/app/scripts/main`
+    ]
   },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: `${__dirname}/dist`,
     filename: '[name].js',
-    publicPath: 'http://localhost:3000/'
+    publicPath: '/js/'
   },
   devtool: 'eval-source-map',
   module: {
@@ -21,15 +18,18 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: ['babel']
+        loaders: ['babel-loader']
       }
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['.js', '.jsx']
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin(['app', 'vendor'], 'js/[name].js'),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: 'vendor.js'
+    }),
     new webpack.HotModuleReplacementPlugin()
   ]
 };

@@ -8,16 +8,9 @@
 
 import React from 'react';
 
-var Footer = React.createClass({
-  propTypes: {
-    children: React.PropTypes.element.isRequired
-  },
+const Footer = props =>
+  <footer className="container-fluid" style={{ marginTop: 10 }}>
+    {props.children}
+  </footer>;
 
-  render: function () {
-    return (
-      <footer className="container-fluid" style={{marginTop: 10}}>{this.props.children}</footer>
-    );
-  }
-});
-
-module.exports = Footer;
+export default Footer;

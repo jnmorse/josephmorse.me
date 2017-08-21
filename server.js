@@ -1,58 +1,102 @@
-var path = require('path');
-var express = require('express');
-var webpack = require('webpack');
-var config = require('./webpack.config');
-var sass = require('node-sass-middleware');
+const path = require('path');
+const express = require('express');
+const sass = require('node-sass-middleware');
+const bodyParser = require('body-parser');
+const helper = require('sendgrid').mail;
+const cors = require('cors');
 
-var app = express();
-var router = express.Router();
-var compiler = webpack(config);
+const app = express();
+const keys = require('./config');
+const sg = require('sendgrid')(keys.sendgridKey);
 
-var isDevelopmentEnv = (process.env.NODE_ENV !== 'production');
+const isDevelopmentEnv = process.env.NODE_ENV !== 'production';
 
-app.use(sass({
-  src: path.join(__dirname, 'app', 'styles'),
-  dest: path.join(__dirname, 'dist', 'css'),
-  response: true,
-  debug: isDevelopmentEnv,
-  outputStyle: 'compressed',
-  includePaths: [path.join(__dirname, 'node_modules')],
-  prefix: '/css'
-}));
+app.use(cors());
+app.use(
+  sass({
+    src: path.join(__dirname, 'app', 'styles'),
+    dest: path.join(__dirname, 'dist', 'css'),
+    response: true,
+    debug: isDevelopmentEnv,
+    outputStyle: 'compressed',
+    includePaths: [path.join(__dirname, 'node_modules')],
+    prefix: '/css'
+  })
+);
+
+app.use(
+  '/bootstrap',
+  express.static(path.join(__dirname, 'node_modules', 'bootstrap-sass'))
+);
+app.use(
+  '/font-awesome',
+  express.static(path.join(__dirname, 'node_modules', 'font-awesome'))
+);
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use('/css', express.static(path.join(__dirname, 'dist', 'css')));
-app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules', 'bootstrap-sass')));
-app.use('/font-awesome', express.static(path.join(__dirname, 'node_modules', 'font-awesome')));
+
+app.post('/mail', (req, res) => {
+  const fromEmail = new helper.Email(req.body.from, req.body.name);
+  const toEmail = new helper.Email('joseph@josephmorse.me', 'Joseph Morse');
+  const content = new helper.Content('text/plain', req.body.message);
+  const mail = new helper.Mail(fromEmail, req.body.subject, toEmail, content);
+
+  var request = sg.emptyRequest({
+    method: 'POST',
+    path: '/v3/mail/send',
+    body: mail.toJSON()
+  });
+
+  sg.API(request, (error, response) => {
+    if (error) {
+      res.send({ error: 'Problem Sending' });
+      console.error(error, req.body);
+      return;
+    }
+
+    res.send({ sent: 'okay', ...response });
+  });
+});
 
 if (isDevelopmentEnv) {
-  app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: true,
-    publicPath: config.output.publicPath
-  }));
+  const webpack = require('webpack');
+  const config = require('./webpack.config');
 
-  app.use(require('webpack-hot-middleware')(compiler));
+  const compiler = webpack(config);
+
+  app.use(
+    require('webpack-dev-middleware')(compiler, {
+      noInfo: true,
+      publicPath: config.output.publicPath
+    })
+  );
+
+  app.use(
+    require('webpack-hot-middleware')(compiler, {
+      log: console.log,
+      path: '/__webpack_hmr',
+      heartbeat: 10 * 1000
+    })
+  );
 
   app.use(express.static(path.join(__dirname, 'app')));
 
-  app.get('*', function response(req, res) {
-    res.sendFile(path.join(__dirname, 'app/index.html'));
+  app.get('*', (req, res) => {
+    res.sendFile(`${__dirname}/app/index.html`);
   });
-}
-
-else {
+} else {
   app.use(express.static(path.join(__dirname, 'dist')));
   app.use('/images', express.static(path.join(__dirname, 'app', 'images')));
 
-  app.get('*', function response(req, res) {
+  app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'app/index.html'));
   });
 }
 
-app.post('/mail', function (req, res) {
-  res.send({ sent: 'okay' });
-});
-
-app.listen(3000, '0.0.0.0', function (err) {
+app.listen(3000, '0.0.0.0', err => {
   if (err) {
     console.log(err);
     return;

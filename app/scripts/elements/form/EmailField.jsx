@@ -5,16 +5,24 @@ export default class TextField extends Component {
     super(props);
   }
 
-  render () {
+  render() {
     return (
       <div key={this.props.id} className="form-group has-success">
-        <label className="control-label" htmlFor={this.props.id}><span>{this.props.label}</span></label>
-        <input className={['form-control'].join(' ')}
+        <label className="control-label" htmlFor={this.props.id}>
+          <span>
+            {this.props.label}
+          </span>
+        </label>
+        <input
+          className={['form-control'].join(' ')}
           type="email"
           name={this.props.id}
+          onChange={this.props.update}
+          value={this.props.value}
           id={this.props.id}
           placeholder={this.props.placeHolder}
-          required={this.props.required} />
+          required={this.props.required}
+        />
       </div>
     );
   }
