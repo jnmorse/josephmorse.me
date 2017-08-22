@@ -4,3 +4,4 @@ dist/
 *.pem
 sendgrid.env
 config/dev.js
+!projects/*/dist/*

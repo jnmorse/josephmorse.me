@@ -14,17 +14,14 @@ WORKDIR /usr/src/app
 # Copy package.json
 COPY package.json .
 
+# Set Production variable
+ENV NODE_ENV production
+
+# Start Server
 # Run NPM install
 RUN ["npm", "install"]
 
 # Copy over source files
 COPY . .
 
-# Set Production variable
-ENV NODE_ENV production
-
-# Run Build
-RUN ["npm", "run", "build"]
-
-# Start Server
 CMD ["npm", "start"]

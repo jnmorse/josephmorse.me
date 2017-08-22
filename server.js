@@ -3,7 +3,6 @@ const express = require('express');
 const sass = require('node-sass-middleware');
 const bodyParser = require('body-parser');
 const helper = require('sendgrid').mail;
-const cors = require('cors');
 
 const app = express();
 const keys = require('./config');
@@ -11,7 +10,6 @@ const sg = require('sendgrid')(keys.sendgridKey);
 
 const isDevelopmentEnv = process.env.NODE_ENV !== 'production';
 
-app.use(cors());
 app.use(
   sass({
     src: path.join(__dirname, 'app', 'styles'),
@@ -61,6 +59,15 @@ app.post('/mail', (req, res) => {
   });
 });
 
+app.use(
+  '/dist',
+  express.static(`${__dirname}/projects/freecodecamp-twitchtv/dist`)
+);
+
+app.get('/twitchtv', (req, res) => {
+  res.sendFile(`${__dirname}/projects/freecodecamp-twitchtv/index.html`);
+});
+
 if (isDevelopmentEnv) {
   const webpack = require('webpack');
   const config = require('./webpack.config');
@@ -88,7 +95,7 @@ if (isDevelopmentEnv) {
     res.sendFile(`${__dirname}/app/index.html`);
   });
 } else {
-  app.use(express.static(path.join(__dirname, 'dist')));
+  app.use('/js', express.static(`${__dirname}/dist/js`));
   app.use('/images', express.static(path.join(__dirname, 'app', 'images')));
 
   app.get('*', (req, res) => {

@@ -7,14 +7,15 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Header extends Component {
   static get propTypes() {
     return {
-      children: React.PropTypes.element,
-      title: React.PropTypes.string.isRequired,
-      style: React.PropTypes.object,
-      level: React.PropTypes.number
+      children: PropTypes.element,
+      title: PropTypes.string.isRequired,
+      style: PropTypes.object,
+      level: PropTypes.number
     };
   }
 

@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
-import Header from './elements/Header';
 import Footer from './elements/Footer';
 import Copyright from './components/Copyright';
 import Person from './models/Person';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 // import { Router, Link } from 'react-router-dom';
 
 export default class Base extends Component {
+  static get propTypes() {
+    return {
+      children: PropTypes.oneOfType([
+        PropTypes.element,
+        PropTypes.arrayOf(PropTypes.element)
+      ])
+    };
+  }
+
   render() {
     return (
       <div>
@@ -36,6 +45,9 @@ export default class Base extends Component {
               <ul className="nav navbar-nav">
                 <li>
                   <Link to="about">About</Link>
+                </li>
+                <li>
+                  <Link to="projects">Projects</Link>
                 </li>
                 <li>
                   <Link to="contact">Contact</Link>
