@@ -1,0 +1,3 @@
+[submodule "projects/freecodecamp-twitchtv"]
+	path = projects/freecodecamp-twitchtv
+	url = git@github.com:jnmorse/freecodecamp-twitchtv.git
