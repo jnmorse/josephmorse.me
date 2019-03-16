@@ -9,17 +9,21 @@ LABEL version="1.0.4" \
 EXPOSE 3000
 
 # Set Work Dir
-WORKDIR /app
+WORKDIR /usr/profile
 
 # Copy package.json
-COPY . .
+COPY package.json .
 
 # Run NPM install
 RUN npm install
 
+ENV NODE_ENV production
+
+# COPY OVER OTHER FILES
+COPY . .
 
 # Run Build
 RUN ["npm", "run", "build"]
 
 # Start Server
-CMD ['sh']
+CMD npm run start
