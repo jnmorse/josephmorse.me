@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class FormSection extends Component {
   constructor (props) {
@@ -19,5 +20,5 @@ export default class FormSection extends Component {
 }
 
 FormSection.propTypes = {
-  title: React.PropTypes.string.isRequired
+  title: PropTypes.string.isRequired
 };

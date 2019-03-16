@@ -5,18 +5,14 @@ import Button from '../elements/Button.jsx';
 import { FaIcon } from '../components/font-awesome/FaIcon.jsx';
 
 export default class Contact extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      error: false,
-      name: '',
-      from: '',
-      subject: '',
-      message: '',
-      success: false
-    };
-  }
+  state = {
+    error: false,
+    name: '',
+    from: '',
+    subject: '',
+    message: '',
+    success: false
+  };
 
   async sendMail(data, cb) {
     const request = await fetch('/mail', {
@@ -28,8 +24,7 @@ export default class Contact extends Component {
       body: JSON.stringify(data)
     });
     const res = await request.json();
-    // const res = await axios.post('/mail', data);
-    cb(null, res);
+    cb(res);
   }
 
   stopSend(e) {
@@ -44,8 +39,8 @@ export default class Contact extends Component {
 
     // console.log(data);
 
-    this.sendMail(data, error => {
-      if (error) {
+    this.sendMail(data, res => {
+      if (res.error) {
         return this.setState({ error: 'There was a problem' });
       }
 

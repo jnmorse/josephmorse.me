@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Form extends Component {
   constructor (props) {
@@ -13,9 +14,9 @@ export default class Form extends Component {
 }
 
 Form.propTypes = {
-  method: React.PropTypes.string,
-  action: React.PropTypes.string,
-  type: React.PropTypes.string
+  method: PropTypes.string,
+  action: PropTypes.string,
+  type: PropTypes.string
 };
 
 Form.defaultProps = {

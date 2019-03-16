@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 
 export default class TextField extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div key={this.props.id} className="form-group has-success">

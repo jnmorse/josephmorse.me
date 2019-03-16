@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Button extends Component {
   constructor (props) {
@@ -13,9 +14,9 @@ export default class Button extends Component {
 }
 
 Button.propTypes = {
-  type: React.PropTypes.string,
-  children: React.PropTypes.element.isRequired,
-  clickHandler: React.PropTypes.func
+  type: PropTypes.string,
+  children: PropTypes.element.isRequired,
+  clickHandler: PropTypes.func
 };
 
 Button.defaultProps = {

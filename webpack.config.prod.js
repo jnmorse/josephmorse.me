@@ -1,20 +1,14 @@
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: {
-    app: [
-      'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-      `${__dirname}/app/scripts/main`
-    ]
+    app: __dirname + '/app/scripts/main.js'
   },
   output: {
-    path: `${__dirname}/dist`,
-    filename: '[name].js',
-    publicPath: '/js/'
+    filename: 'js/[name].js',
   },
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -37,8 +31,5 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx']
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ]
+  }
 };
