@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.3.4",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "body-parser": "^1.17.2",
     "bootstrap-sass": "^3.3.7",
     "cors": "^2.8.4",
